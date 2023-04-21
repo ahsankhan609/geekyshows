@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@500&family=Roboto:wght@300&display=swap');
+
+.my-class {
+background-color: red;
+}
+
+html, body{
+    font-family: 'Barlow', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+}

@@ -1,0 +1,43 @@
+{% extends "course/base.html" %}
+
+{% load static %}
+
+{% block corecss %} <!-- We will use this block to manage static files on the project or application basis.-->
+<link rel="stylesheet" href='{% static "/css/reg.css" %}'>
+{% endblock corecss %}
+
+<title>{% block title %} {{ title }} {% endblock title %}</title>
+
+{% block content %}
+<h1>Login Here.</h1>
+<br>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+        {% endfor %}
+    {% endif %}
+
+    {% for fm in form %}
+        {{ fm.label_tag }} {{ fm }} {{ fm.errors|striptags }} <br> <br>
+    {% endfor %} <br>
+    
+    <input type="submit" value="Login" class='btn btn-success'>
+</form>
+
+<br>
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+<a href="{% url 'dj-reg' %}">No Account - Register Here.</a>
+
+{% endblock content %}

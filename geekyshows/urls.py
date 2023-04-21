@@ -22,4 +22,5 @@ urlpatterns = [
     path('enroll/',include('enroll.urls')),
     path('fees/',include('fees.urls')),
     path('dj_messages/',include('dj_messages.urls')),
+    path('Auth/',include('dj_auth.urls')),
 ]
