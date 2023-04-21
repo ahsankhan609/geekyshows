@@ -45,6 +45,7 @@ EXTERNAL_APPS = [
     'fees',
     'result',
     'dj_messages',
+    'dj_auth',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
