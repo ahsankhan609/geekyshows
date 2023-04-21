@@ -3,5 +3,18 @@
 <title>{% block title %} Django Flash Messages {% endblock title %}</title>
 
 {% block content %}
-dj mesages
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register">
+</form>
+<br>
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+
 {% endblock content %}

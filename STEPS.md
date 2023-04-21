@@ -78,7 +78,12 @@
 
 - let's say we have a *top course page*, so we will use it as follows:
 - make top_pages.html page
-- then use this code - {% include template_folder_name/top_pages.html %} to include that page into any page
-- we can pass any custom value as well in it. like this - {% include template_folder_name/top_pages.html with p='PHP' %}
-- then that variable name *p* will be shown on *top_pages.html* as django variable {{ p }}, to get its value in the main page
-- and if i just want to show the 1 value in variable then i wil use like this - {% include template_folder_name/top_pages.html with p='PHP' only %}
+- then use this code - `{% include template_folder_name/top_pages.html %}` to include that page into any page
+- we can pass any custom value as well in it. like this -`{% include template_folder_name/top_pages.html with p='PHP' %}`
+- then that variable name *p* will be shown on *top_pages.html* as django variable`{{ p }}`, to get its value in the main page
+- and if i just want to show the 1 value in variable then i wil use like this - `{% include template_folder_name/top_pages.html with p='PHP' only %}`
+
+## Changing Default Message Template `settings.py`
+
+![Default Message Levels](static/notes_images/dj_messages_level.png)
+![Default Message Options](static/notes_images/change_default_message_options.png)
