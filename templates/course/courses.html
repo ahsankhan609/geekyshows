@@ -1,0 +1,37 @@
+{% extends 'course/base.html' %}
+
+<title>{% block title %} Course Details. {% endblock title %}</title>
+
+{% block content %}
+<div class="container-fluid">
+  <ul class="list-group">
+    <li class="list-group-item"><a href="/course/html_detail/">HTML</a></li>
+    <li class="list-group-item"><a href="{% url 'css_detail' %}">CSS</a></li>
+    <li class="list-group-item">J-QUERY</li>
+    <li class="list-group-item">PYTHON</li>
+    <li class="list-group-item">DJNAGO</li>
+  </ul>
+  <p class="my-class">The full Details of the Course is given below.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>{{ name }}</td>
+        <td>{{ price }}</td>
+        <td>{{ description }}</td>
+        <td>{{ duration }}</td>
+        <td>{{ dates|date:"D d M Y O I" }}</td>
+      </tr>
+  </table>
+</div>
+{% endblock content %}
