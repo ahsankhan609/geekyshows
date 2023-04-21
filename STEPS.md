@@ -50,7 +50,7 @@
 - static/js/main.js
 - static/images/main.jpg
 - then open HTML file and write this code above. - {% load static %}
-- <link href='{% static "css/main.css" %}'>
+- `<link href='{% static "css/main.css" %}'>`
 
 ### Filters for Django templates
 
@@ -67,7 +67,7 @@
 - `{% block content %}{% endblock content %}`
 - then in all other HTML pages we use these code - `{% extends 'core/base.html' %}`
 - `<title>{% block title %} Home Page {% endblock title %}</title>`
-- If we need to import default value as well we use - <title>{% block title %}{block.super} Home Page {% endblock title %}</title>
+- If we need to import default value as well we use - `<title>{% block title %}{block.super} Home Page {% endblock title %}</title>`
 - `{% block content %}` I am new Home Page. `{% endblock content %}`
 
 ### Prepare URL for href tag
