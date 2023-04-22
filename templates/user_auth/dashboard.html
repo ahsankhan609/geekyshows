@@ -9,6 +9,16 @@
 <title>{% block title %} {{ title }} {% endblock title %}</title>
 
 {% block content %}
+<hr>
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+  <hr>
+  
 <h1>Welcome - 
     {% if username %} 
         {% if request.user.first_name and request.user.last_name %}
@@ -19,13 +29,21 @@
     {% endif %} to Dashboard!
 </h1>
 
-{% if messages %}
-{% for message in messages %}
-<div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
-    {{ message }}
-    {% endfor %}
-</div>
-{% endif %}
-  <hr>
 <a href="{% url 'dj-logout' %}">Logout</a> | <a href="{% url 'dj-ch-password' %}">Change Password with Old Password</a> | <a href="{% url 'dj-ch-password1' %}">Change Password without Old Password</a>
+
+<hr>
+<h3>Update Your Profile</h3>
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+
+    {% for fm in form  %}
+    {{ fm.label_tag }}  {{ fm }} {{ fm.errors|striptags }} <br> <br>
+    {% endfor %}
+    <input type="submit" value="Update Profile" class='btn btn-success'>
+</form>
 {% endblock content %}

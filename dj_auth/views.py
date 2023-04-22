@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from dj_auth.forms import *
 
-# def register(request):
+# Deafult UserForm with Username and Password only. Not Firstname and Lastname
+# def register(request): 
 #     if request.method == 'POST':
 #         fm = UserCreationForm(request.POST)
 #         if fm.is_valid():
@@ -60,11 +61,25 @@ def user_login(request):
 @login_required(login_url='dj-login')
 def dashboard(request):
     if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.user.is_superuser == True:
+                fm = EditAdminProfileForm(request.POST, instance=request.user)
+            else:
+                fm = EditUserProfileForm(request.POST, instance=request.user)
+            if fm.is_valid():
+                messages.success(request,'Profile updated successfully.')
+                fm.save()
+        else:
+            if request.user.is_superuser == True: # Checdk whether user is superuser or not
+                fm = EditAdminProfileForm(instance = request.user)
+            else:
+                fm = EditUserProfileForm(instance=request.user)
         context = {
             'title': 'Dashboard',
             'username': request.user.first_name + ' ' + request.user.last_name,
+            'form': fm
         }
-        messages.success(request, 'Succesfully Logged In!')
+        #messages.success(request, 'Succesfully Logged In!')
         return render(request,'user_auth/dashboard.html',context)
     else:
         return redirect('dj-login')

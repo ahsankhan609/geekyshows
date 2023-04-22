@@ -87,3 +87,12 @@
 
 ![Default Message Levels](static/notes_images/dj_messages_level.png)
 ![Default Message Options](static/notes_images/change_default_message_options.png)
+
+## Features of Auth/User
+
+- User Registration
+- User Login/Logout
+- Redirect to User Dashboard
+- Authorize User only go to Dashboard
+- Update User Profile
+- Update User Password with 2 Features - Update with Old Password & Update without Old Password

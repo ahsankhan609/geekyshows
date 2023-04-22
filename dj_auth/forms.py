@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 # We are making this custom form becuae we want all fields for User Registration
-
 class SignUpForm(UserCreationForm):
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput, required=True)
     class Meta:
@@ -20,3 +19,21 @@ class SignUpForm(UserCreationForm):
         }
         label_suffix = ""
         label_attr = {'class': 'form-label'}
+
+# We are using this class to update User Profile in the Dashboard
+class EditUserProfileForm(UserChangeForm):
+    # don't wan to show Password
+    password = None
+    class Meta:
+        model = User
+        # display the field's that user wants to Update
+        fields = ('first_name', 'last_name')
+        
+# We are using this class to update Admin Profile in the Dashboard
+class EditAdminProfileForm(UserChangeForm):
+    # don't wan to show Password
+    password = None
+    class Meta:
+        model = User
+        # display the field's that user wants to Update
+        fields = '__all__'
