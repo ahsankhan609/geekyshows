@@ -2,14 +2,18 @@
 
 ## Create a new Django Project with the following steps
 
-- [VirtualEnvironmentWrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
-- pip install virtualenvwrapper-win
-- mkvirtualenv virtual_environment_name
-- workon virtual_environment_name ( to activate after deactivaiton)
+- python -m venv virtual_environment_name
+- virtual_environment_name\Scripts\activate ( to activate after deactivaiton)
 - django-admin startproject *project_name* (usually prefered name is 'config') for easiness later on
 - cd *project_name*
 - python manage.py startapp *app_name*
 - go to settings.py in the main project folder and add the *app_name* to the *INSTALLED_APPS['app_name']*
+
+## For Security Purposes store Django Secret Key and PostgreSQL Credentials in the settings->.env File
+
+- [Start Django Project with a Database(PostgreSQL)](https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8)
+- [Creating Environment Variables](https://djangocentral.com/environment-variables-in-django/)
+- make `.env` file in the main core folder where `settings.py` resides and shift all secret keys there
 
 ## Create function Based views
 
