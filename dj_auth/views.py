@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm, SetPasswordForm
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from dj_auth.forms import *
@@ -26,6 +27,11 @@ def register(request): # Own UserForm
         fm = SignUpForm(request.POST)
         if fm.is_valid():
             fm.save()
+            # Let's say we want to add user to any specific group. Like Editor or Manager then first of all we create groups in the Admin pannle. Then we do the following
+            # from django.contrib.auth.models import Group
+            # user = fm.save()
+            # group = Group.objects.get(name='Editor)
+            # user.groups.add(group)
             messages.success(request, 'Registration successful.')            
             return redirect('dj-login')
     else:
