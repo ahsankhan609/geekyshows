@@ -102,3 +102,21 @@
 - Authorize User only go to Dashboard
 - Update User Profile
 - Update User Password with 2 Features - Update with Old Password & Update without Old Password
+
+## User Permissions & Authorization
+
+- To get the logged in user data (username, first_name, last_name, email) - we will user `request.user` to see all data, or more specificaly request.user.first_name to see first name.
+
+- when we create a new Model, it by default gives all permissions. Such as Add, Edit and Delete in the Database.
+
+- If we want to give some permissions to the user such as Add, Edit, Delete or update, then we can use Admin Panel for this. And then in the Template we can check it with the `perms`. Example is below:
+
+```python
+{% if perms.enroll.delete_blog % } # Here perms is function,enroll is app name, delete is permission name, and blog is Model name
+<input type='button' value = 'delete'>
+{% else %}
+<p>You have no permission to delete.</p>
+{% endif %}
+```
+
+- so if the user have permission to delete in the Admin pannel, then it will see that delete button, otherwise nothing.
