@@ -23,4 +23,5 @@ urlpatterns = [
     path('fees/',include('fees.urls')),
     path('dj_messages/',include('dj_messages.urls')),
     path('Auth/',include('dj_auth.urls')),
+    path('miniblog/',include('dj_miniblog.urls')),
 ]
