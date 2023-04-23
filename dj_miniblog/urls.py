@@ -2,10 +2,11 @@ from django.urls import path
 from dj_miniblog.views import *
 
 urlpatterns = [
-    path('', register ,name='dj-reg'),
-    path('login/', user_login ,name='dj-login'),
-    path('dashboard/', dashboard ,name='dj-dashboard'),
-    path('logout/', user_logout ,name='dj-logout'),
-    path('change_password/', change_password ,name='dj-ch-password'),
-    path('change_password1/', change_password1 ,name='dj-ch-password1'),
+    path('', home ,name='dj-miniblog-home'),
+    path('about/', about ,name='dj-miniblog-about'),
+    path('contact/', contact ,name='dj-miniblog-contact'),
+    path('dashboard/', dashboard ,name='dj-miniblog-dashboard'),
+    path('register/', register ,name='dj-miniblog-register'),
+    path('login_user/', login_user ,name='dj-miniblog-login-user'),
+    path('logout_user/', logout_user ,name='dj-miniblog-logout-user'),
 ]

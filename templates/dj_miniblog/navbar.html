@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'dj-miniblog-home' %}">Mini Blog</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'dj-miniblog-home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dj-miniblog-about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dj-miniblog-contact' %}">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dj-miniblog-dashboard' %}">Dashboard</a>
+          </li><li class="nav-item">
+            <a class="nav-link" href="{% url 'dj-miniblog-logout-user' %}">Logout</a>
+          </li><li class="nav-item">
+            <a class="nav-link" href="{% url 'dj-miniblog-register' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dj-miniblog-login-user' %}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
