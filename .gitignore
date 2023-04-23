@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.vscode
 
 # C extensions
 *.so
@@ -115,6 +116,8 @@ celerybeat.pid
 .env
 .venv
 env/
+/env
+*.env
 venv/
 ENV/
 env.bak/
