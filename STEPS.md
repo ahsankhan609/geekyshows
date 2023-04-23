@@ -120,3 +120,7 @@
 ```
 
 - so if the user have permission to delete in the Admin pannel, then it will see that delete button, otherwise nothing.
+
+## Dj_Mini_Blog Project
+
+- A Simple Blog with User Account and Group Features like Editor can add/edit blog post and Admin can do all.

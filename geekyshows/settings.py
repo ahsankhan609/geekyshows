@@ -51,6 +51,7 @@ EXTERNAL_APPS = [
     'result',
     'dj_messages',
     'dj_auth',
+    'dj_miniblog',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
