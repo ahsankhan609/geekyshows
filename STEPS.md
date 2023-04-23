@@ -14,6 +14,8 @@
 - [Start Django Project with a Database(PostgreSQL)](https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8)
 - [Creating Environment Variables](https://djangocentral.com/environment-variables-in-django/)
 - make `.env` file in the main core folder where `settings.py` resides and shift all secret keys there
+- [Follow these instrucitons for best Django Security Practices](https://learndjango.com/tutorials/django-best-practices-security)
+- `python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'`. Print this Command into terminal to generate Secret Key. `*This is Django Default method*`.
 
 ## Create function Based views
 
