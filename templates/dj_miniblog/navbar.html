@@ -15,16 +15,20 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'dj-miniblog-contact' %}">Contact</a>
           </li>
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'dj-miniblog-dashboard' %}">Dashboard</a>
           </li><li class="nav-item">
             <a class="nav-link" href="{% url 'dj-miniblog-logout-user' %}">Logout</a>
-          </li><li class="nav-item">
+          </li>
+          {% else %}
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'dj-miniblog-register' %}">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'dj-miniblog-login-user' %}">Login</a>
           </li>
+          {% endif %}
         </ul>
       </div>
     </div>

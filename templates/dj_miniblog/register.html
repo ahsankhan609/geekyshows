@@ -7,12 +7,17 @@
 {% block content %}
 
 <div class="col-sm-10">
-    <h3 class='text-white my-5'>Register.</h3>
+    <h3 class='text-white my-5'>Register - Become Author.</h3>
+    {% if messages %}
+    {% for message in messages  %}
+    <p {% if message.tags %} class='alert alert-{{ message.tags }} mb-5'{% endif %}>{{ message }}</p>
+    {% endfor %}
+    {% endif%}
 <form action="" method="POST">
     {% csrf_token %}
     {% for fm in form %}
     <div class="form-group">
-    {{ fm.label_tag }} {{ fm }} <small class='test-warning'>{{ fm.errors|striptags }}</small> <br>
+    {{ fm.label_tag }} {{ fm }} <small class='text-warning'>{{ fm.errors|striptags }}</small> <br>
     </div>
     {% endfor %}
     <input type="submit" value="Register" class='btn btn-success'>
@@ -22,5 +27,8 @@
     <p class='alert alert-danger my-3'>{{ error }}</p>
     {% endfor %}
 {% endif %}
+
+<br>
+<a href="{% url 'dj-miniblog-login-user' %}" class='alert alert-info'>Have Account. Login Here.</a>
 </div>
 {% endblock content %}

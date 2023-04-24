@@ -56,6 +56,32 @@ EXTERNAL_APPS = [
 
 INSTALLED_APPS += EXTERNAL_APPS
 
+# settings.py for dj_miniblog
+LOGIN_REDIRECT_URL = 'dj-miniblog-dashboard'
+
+# If you have other applications that are using the Django authentication system and you want to customize the redirect URL for each one, you can define a separate LOGIN_REDIRECT_URL setting in the settings.py file for each application. For example:
+
+# settings.py for app1
+# LOGIN_REDIRECT_URL = 'app1-dashboard'
+
+# settings.py for app2
+# LOGIN_REDIRECT_URL = 'app2-dashboard'
+
+# Then, in the views for each application, you can use the reverse function to generate the correct URL for the redirect:
+# views.py for app1
+# from django.urls import reverse
+
+# @login_required
+# def dashboard(request):
+#     return redirect(reverse('app1-dashboard'))
+
+# views.py for app2
+# from django.urls import reverse
+
+# @login_required
+# def dashboard(request):
+#     return redirect(reverse('app2-dashboard'))
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
