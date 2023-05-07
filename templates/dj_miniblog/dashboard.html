@@ -8,8 +8,12 @@
 
 <div class="col-sm-10">
     <h3 class='text-white my-5'>Welcome to Dashboard. {{ request.user.first_name }} {{ request.user.last_name }}</h3>
-
-    
-
+{% if posts %}
+{% for post in posts %}
+<h3>{{ post.title }}</h3>
+    <p> {{ post.description }}</p>
+<small>{{ post.created_at|date:'d M Y' }} - by : {{ post.author.first_name }}</small>
+{% endfor %}
+{% endif %}
 </div>
 {% endblock content %}

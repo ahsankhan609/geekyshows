@@ -29,8 +29,10 @@ def contact(request):
 
 @login_required(login_url='dj-miniblog-login-user')
 def dashboard(request):
+    posts = Post.objects.all()
     context = {
-        'title': 'Dashboard'
+        'title': 'Dashboard',
+        'posts': posts,
     }
     return render(request,'dj_miniblog/dashboard.html',context)
 
