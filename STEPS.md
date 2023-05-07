@@ -1,13 +1,15 @@
-# How to Make Django Application
+# Django Web Development - Beginner to Advanced
 
-## Create a new Django Project with the following steps
+## Creating New Django Project
 
-- python -m venv virtual_environment_name
-- virtual_environment_name\Scripts\activate ( to activate after deactivaiton)
-- django-admin startproject *project_name* (usually prefered name is 'config') for easiness later on
-- cd *project_name*
-- python manage.py startapp *app_name*
-- go to settings.py in the main project folder and add the *app_name* to the *INSTALLED_APPS['app_name']*
+- mkdir project_name
+- `python -m venv virtual_environment_name`
+- `virtual_environment_name\Scripts\activate` ( to activate virtual_enviroment)
+- `django-admin startproject *project_name .*` (usually prefered name is 'config') for easiness later on
+- cd `*project_name*`
+- `python manage.py startapp *app_name*`
+- go to settings.py in the main project folder
+- add the `*app_name*` to the `*INSTALLED_APPS['app_name']*`
 
 ## For Security Purposes store Django Secret Key and PostgreSQL Credentials in the settings->.env File
 
@@ -38,10 +40,10 @@
 
 ### if we are making templates folder inside the main project folder
 
-- go to *settings.py* of the main project folder
-- add these two lines of code
-- TEMPLATE_DIR = os.path.join(BASE_DIR , 'templates')
-- the make 2 folders in the main project folder, named *templates* & 'static'. these are for HTML and CSS templates
+- go to `*settings.py*` of the main project folder
+- add these two lines of code:
+- `TEMPLATE_DIR = os.path.join(BASE_DIR , 'templates')`
+- the make 2 folders in the main project folder, named `*templates*` & `*static*`.
 - but if we make templates folder inside the application folder, then no need to add them in the *settings.py* file
 - so if we have to make any HTML file realted to the app's then we make that app folder name inside templates folder, and then place related HTML files inside that, but if we make any HTML file realted to the main project then only place them inside the templates folder.
 - then create the views.py file in the main project(config) folder and add its URL's inside the main project(condig) urls.py file. and add this code to import the views.py file - *from . import views*
@@ -49,13 +51,17 @@
 
 ### Static Folder
 
-- make a static folder inside the main project folder. then go to *settings.py*
+- make a static folder inside the main project folder. then go to `*settings.py*`
+
+```python
 - STATIC_DIR = os.path.join(BASE_DIR , 'static')
 - STATICFILES_DIRS = [STATIC_DIR]
 - static/css/main.css
 - static/js/main.js
 - static/images/main.jpg
-- then open HTML file and write this code above. - {% load static %}
+```
+
+- then open HTML file and write this code above. - `{% load static %}`
 - `<link href='{% static "css/main.css" %}'>`
 
 ### Filters for Django templates
