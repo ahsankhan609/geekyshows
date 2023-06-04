@@ -2,16 +2,16 @@
 
 ## Creating New Django Project
 
-- mkdir project_name
+- `mkdir project_name`
 - `python -m venv virtual_environment_name`
 - `virtual_environment_name\Scripts\activate` ( to activate virtual_enviroment)
 - `django-admin startproject *project_name .*` (usually prefered name is 'config') for easiness later on
 - cd `*project_name*`
 - `python manage.py startapp *app_name*`
-- go to settings.py in the main project folder
+- go to `settings.py` in the main project folder
 - add the `*app_name*` to the `*INSTALLED_APPS['app_name']*`
 
-## For Security Purposes store Django Secret Key and PostgreSQL Credentials in the settings->.env File
+## For Security Purposes store Django Secret Key and PostgreSQL Credentials in the config folder->.env File
 
 - [Start Django Project with a Database(PostgreSQL)](https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8)
 - [Creating Environment Variables](https://djangocentral.com/environment-variables-in-django/)
