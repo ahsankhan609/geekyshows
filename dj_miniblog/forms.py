@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext,gettext_lazy as _
+from .models import *
 
 class RegisterForm(UserCreationForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control','required': True,'placeholder':'Your Secret Password'}))
@@ -50,3 +51,11 @@ class LoginForm(AuthenticationForm):
                 self.confirm_login_allowed(self.user_cache)
 
         return self.cleaned_data
+    
+class PostForm (forms .ModelForm) :
+    class Meta:
+        model = Post
+        fields = ['title', 'description' ]
+        labels = {'title': 'Title','description': 'Description'}
+        widgets = {'title':forms.TextInput(attrs={'class': 'form-control'}),
+        'description':forms.Textarea(attrs={'class': 'form-control'}), }

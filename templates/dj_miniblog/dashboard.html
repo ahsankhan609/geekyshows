@@ -4,16 +4,70 @@
 
 {% block title %} {{ title }}{% endblock title %}
 
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert alert -{{ message.tags }} alert-dismissible fade show" {% endif %}>
+                <strong>{{message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-Label="Close"><span aria-hidden="true">&times; </span></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+{% block sidebar %}
+<div class="col-sm-2 text-white my-5 text-center">
+    <h4 class="my-5">Profile</h4>
+    <h5>Author : {{ fname }}</h5>
+    {% for group in groups %}
+        <p>Member of : {{ group.name }}</p>
+    {% endfor %}
+</div>
+{% endblock sidebar %}
+
 {% block content %}
 
 <div class="col-sm-10">
     <h3 class='text-white my-5'>Welcome to Dashboard. {{ request.user.first_name }} {{ request.user.last_name }}</h3>
+    <a href="{% url 'dj-miniblog-add-post' %}" class='btn btn-sm btn-success'>Add Post</a>
+    <h4 class="text-center alert alert-info mt-3">Show Post Information</h4>
 {% if posts %}
-{% for post in posts %}
-<h3>{{ post.title }}</h3>
-    <p> {{ post.description }}</p>
-<small>{{ post.created_at|date:'d M Y' }} - by : {{ post.author.first_name }}</small>
-{% endfor %}
+<table class="table table-hover bg-white">
+        <thead>
+        <tr class="text-center">
+        <th scope="col" style="width:2%">ID</th>
+        <th scope="col" style="width:28%">Title</th>
+        <th scope="col" style="width:55%">Description</th>
+        <th scope="col" style="width:15%">Action</th>
+        </tr>
+        </thead>
+    <tbody>
+    {% for post in posts %}
+    <tr>
+        <th scope="row">{{post.id}}</th>
+        <td>{{post.title}}</td>
+        <td>{{post.description|truncatewords:5}}</td>
+        <td class="text-center">
+            <a href="{% url 'dj-miniblog-update-post' post.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <!--Check if user is added into Admin or Author Group-->
+            {% if perms.blog.delete_post %}
+            <form action="{% url 'dj-miniblog-delete-post' post.id %}" method="post" class="d-inline"> 
+            {% csrf_token %}
+        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+            </form>
+        {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h4 class="text-center alert alert-warning">No Records</h4>
 {% endif %}
 </div>
 {% endblock content %}
+
+{% comment %} {% for post in posts %}
+<h3>{{ post.title }}</h3>
+    <p> {{ post.description }}</p>
+<small>{{ post.created_at|date:'d M Y' }} - by : {{ post.author.first_name }}</small> {% endcomment %}
