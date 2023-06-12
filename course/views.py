@@ -47,3 +47,31 @@ def delcookie(request):
     response = render(request, 'course/delcookie.html')
     response.delete_cookie('name')
     return response
+
+############################################################################################################
+
+# set session
+import random
+def setsession(request):
+    request.session['name'] = random.randint(0,5)
+    return render(request, 'course/setsession.html')
+
+# get session
+def getsession(request):
+    #name = request.session['name']
+    name = request.session.get('name', default='No Session')
+    keys = request.session.keys()
+    items = request.session.items()
+    #age = request.session.setdefault('age', '26') # it will set and get the session with default value.
+    context = {
+        'name': name,
+        'keys': keys,
+        'items': items,
+        #'age': age,
+    }
+    return render(request, 'course/getsession.html',context)
+
+# delete session
+def delsession(request):
+    request.session.flush()
+    return render(request, 'course/delsession.html')
