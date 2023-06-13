@@ -91,6 +91,8 @@ def dashboard(request):
         return redirect('dj-login')
 
 def user_logout(request):
+    request.session.flush() # flush session from database
+    request.session.clear_expired() # clear expired session from browser
     logout(request)
     return redirect('dj-login')
 

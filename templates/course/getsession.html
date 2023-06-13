@@ -18,31 +18,41 @@
         <![endif]-->
         <h3>Session Name is given Below:</h3>
         {% if name %}
-        <h1>{{ name }}</h1>
-        {% else %}
-        <h1>No Session Set.</h1>
-        {% endif %}
-        <a href="{% url 'set-session' %}">Set New Session Here.</a>
-        {% if name == 'No Session' %}
-        {% else %}
-        <a href="{% url 'del-session' %}">Delete Session.</a>
-        <hr>
-        <h2>Here are all Session Key's</h2>
-        {% for key in keys %}
-        <ul>
-            <li>{{ key }}</li>
-        </ul>
-        {% endfor %}
-        <hr>
-        <h2>To See both Key & Value.</h2>
-        {% for key,value in items %}
-        <ul>
-            <li>Key : {{ key }}</li>
-            <li>Value : {{ value }}</li>
-        </ul>
-        {% endfor %}
+            <h1>{{ name }}</h1>
+            {% else %}
+            <h1>No Session Set.</h1>
         {% endif %}
         
+        <a href="{% url 'set-session' %}">Set New Session Here.</a>
+        
+        {% if name == 'No Session' %}
+            {% else %}
+            <a href="{% url 'del-session' %}">Delete Session.</a>
+            <hr>
+            <h2>Here are all Session Key's</h2>
+            {% for key in keys %}
+                <ul>
+                    <li>{{ key }}</li>
+                </ul>
+            {% endfor %}
+            <hr>
+            <h2>To See both Key & Value.</h2>
+            {% for key,value in items %}
+                <ul>
+                    <li>Key : {{ key }}</li>
+                    <li>Value : {{ value }}</li>
+                </ul>
+                {% endfor %}
+        {% endif %}
+        <hr>
+        <h3>Session Cookie Ages:</h3>
+        <p>Session Cookie Age : {{ request.session.get_session_cookie_age }}</p>
+        <p>Session Expiry After : <b>{{ request.session.get_expiry_age }} Seconds.</b></p>
+        <p>Session Expiry Date : {{ request.session.get_expiry_date }}</p>
+        <p>Whether Session Will expire on browser close ? <b>{{ request.session.get_expire_at_browser_close }}</b></p>
+        <hr>
+        <h3>Checking Test Cookie</h3>
+        <p>Whether session test Cookie worked? {{ request.session.test_cookie_worked }}</p>
         <script src="" async defer></script>
     </body>
 </html>

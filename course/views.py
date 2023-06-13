@@ -54,6 +54,9 @@ def delcookie(request):
 import random
 def setsession(request):
     request.session['name'] = random.randint(0,5)
+    
+    # Now set the Test cookie to see whether client browser can support cookies
+    request.session.set_test_cookie()
     return render(request, 'course/setsession.html')
 
 # get session
@@ -73,5 +76,7 @@ def getsession(request):
 
 # delete session
 def delsession(request):
-    request.session.flush()
+    request.session.delete_test_cookie() # delete test cookie
+    request.session.flush() # flush session from database
+    request.session.clear_expired() # clear expired session from browser
     return render(request, 'course/delsession.html')

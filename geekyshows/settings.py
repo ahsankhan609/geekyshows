@@ -52,6 +52,7 @@ EXTERNAL_APPS = [
     'dj_messages',
     'dj_auth',
     'dj_miniblog',
+    'pagecounter',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -159,7 +160,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata' # Set time zone for the session cookie. Default is 'UTC'.'https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'
 
 USE_I18N = True
 
@@ -184,3 +185,24 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Session Related Default Settings
+
+# set default session cookie age
+SESSION_COOKIE_AGE = 400
+
+# change default session name
+SESSION_COOKIE_NAME = 'NEW-SESSION-NAME'
+
+# change default session cookie path
+#SESSION_COOKIE_PATH = '/home'
+
+# Make session cookie secure - IT WORKS ON HTTPS ONLY - ACTIVATE IT ON PRODUCTION SERVER
+#SESSION_COOKIE_SECURE = True
+
+# Expire session on Browser close - It is recommended on banks website or wherever important data is handeled.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# To save session in the file, we will override the basic engine settings
+#SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+#SESSION_FILE_PATH = os.path.join(BASE_DIR, 'sessions') # create sessions folder in the path

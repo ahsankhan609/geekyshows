@@ -24,4 +24,5 @@ urlpatterns = [
     path('dj_messages/',include('dj_messages.urls')),
     path('Auth/',include('dj_auth.urls')),
     path('miniblog/',include('dj_miniblog.urls')),
+    path('counter/',include('pagecounter.urls')),
 ]
