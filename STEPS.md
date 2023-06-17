@@ -130,3 +130,139 @@
 ## Dj_Mini_Blog Project
 
 - A Simple Blog with User Account and Group Features like Editor can add/edit blog post and Admin can do all.
+
+## How to Cache / Caching Webpage / Website in the Database - FileSystem
+
+- [Djnago-Cache-Documentation](https://docs.djangoproject.com/en/4.2/topics/cache/)
+- add this code in the middelware section to activate caching on all site
+
+```python
+MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
+]
+```
+
+- then write this code in `settings.py` to save cache in the databse
+
+```python
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "my_cache_table_name",
+    }
+}
+```
+
+- Set the time of cache to expire in seconds
+
+```python
+CACHE_MIDDLEWARE_ALIAS  = '' # cache alias
+CACHE_MIDDLEWARE_SECONDS = 600 # number of seconds each page should be cached.
+CACHE_MIDDLEWARE_KEY_PREFIX = ''  # name of site if multiple sites are used
+```
+
+- Now run  the command in terminal `python manage.py createcachetable`. We can change `TIME_ZONE` accordingly for our convenience. If it doesn't work then change `USE_TZ` to `FALSE`.
+
+```python
+# For filesystem caching settings are:
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/var/tmp/django_cache",
+    }
+}
+# If you’re on Windows, put the drive letter at the beginning of the path, like this:
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "c:/foo/bar",
+    }
+}
+# Pro Tip: Create a folder namesd 'cache' in the root folder. Right clcik on it and click on 'copy realtive path, and paste in the 'LOCATION'.
+```
+
+> Question : How I delete every cache entry in the database after one day, when its expiration time arrives. i want it to automatically delete from the cache_table in the database?
+
+I'm sorry, I misunderstood your question. If you want to delete every cache entry in the database after one day, you can use the **TIMEOUT** option in your CACHES setting. For example:
+
+```python
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table',
+        'TIMEOUT': 86400 # 1 day in seconds
+    }
+}
+```
+
+```python
+This will make the cache entries expire after one day and they will be deleted automatically when they are accessed¹. However, please note that some caches (e.g., the DB cache, filesystem cache, and probably others) do not clean up expired entries except when they're accessed. If you use this trick, you won't ever access the cache entry again and it'll linger until you clear it out⁴.
+
+If you want to delete expired entries periodically without accessing them, you may need to use a custom management command or a cron job to run a SQL query that deletes the expired entries from the cache table³. For example, you can run something like this:
+```
+
+```sql
+DELETE FROM cache_table WHERE expires < NOW();
+```
+
+- [python - Clearing specific cache in Django - Stack Overflow](<https://stackoverflow.com/questions/8784400/clearing-specific-cache-in-django>).
+- [How can I expire entries to Django database cache?](<https://stackoverflow.com/questions/51948687/how-can-i-expire-entries-to-django-database-cache>).
+- [caching - Django cache get expired entry - Stack Overflow](<https://stackoverflow.com/questions/15535291/django-cache-get-expired-entry>).
+- [How to manually clear/update a cached view in django](<https://stackoverflow.com/questions/47040438/how-to-manually-clear-update-a-cached-view-in-django>).
+
+## The per-view cache
+
+> in the `views.py` file we write this, and there is no need to setup any midelwere, but we need to setup the db or filesystem for caching purposes.
+
+```python
+from django.views.decorators.cache import cache_page
+
+
+@cache_page(60 * 15) # 60 Seconds * 15 Minutes. It will be set for 15 Minutes. It will only the current view.
+def my_view(request):
+    ...
+```
+
+> We can also override the `cache prefix` on a per-view basis. `cache_page` takes an optional keyword argument, `key_prefix`, which works in the same way as the `CACHE_MIDDLEWARE_KEY_PREFIX` setting for the middleware. It can be used like this:
+
+```python
+@cache_page(60 * 15, key_prefix="site1")
+def my_view(request):
+    ...
+```
+
+> Here’s the same thing, with my_view wrapped in cache_page, but here is the benefit, if we want one link for the cache page, and other without cached content then we will use this method:
+
+```python
+from django.views.decorators.cache import cache_page
+
+urlpatterns = [
+    path("", cache_page(60 * 15)(my_view),name='my_view'), # it will show the cached page
+    path("home/<int:id>/", cache_page(60 * 15)(my_view),name='my_view_cached'), # it will show the cached page
+    path("home/", my_view,name='my_view_notcached'), # it will not show the cached page
+]
+```
+
+## Best way to Caching in Django With Redis Server
+
+[Best Tutorial on Django Caching](https://blog.sentry.io/django-performance-improvements-part-4-caching-in-django-applications/)
+> We are going to create an application that displays product records, and then we will query to see the different ways of using a cache to retrieve data faster using a cache.
+
+```python
+pip install django-redis
+```
+
+```python
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "example"
+    }
+}
+```

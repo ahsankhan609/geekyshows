@@ -31,6 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+INTERNAL_IPS = ['127.0.0.1']
 
 
 # Application definition
@@ -53,6 +54,8 @@ EXTERNAL_APPS = [
     'dj_auth',
     'dj_miniblog',
     'pagecounter',
+    'caching',
+    'debug_toolbar',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -84,6 +87,7 @@ LOGIN_REDIRECT_URL = 'dj-miniblog-dashboard'
 #     return redirect(reverse('app2-dashboard'))
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -178,7 +182,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads') # Uploades files with the upload_to argument
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Uploades files with the upload_to argument
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -206,3 +210,14 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # To save session in the file, we will override the basic engine settings
 #SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 #SESSION_FILE_PATH = os.path.join(BASE_DIR, 'sessions') # create sessions folder in the path
+
+### Configure as Django Redis backend - Redis server must be active for this purpose.
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}

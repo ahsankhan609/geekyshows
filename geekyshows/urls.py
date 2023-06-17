@@ -16,8 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import debug_toolbar
+
+from django.conf import settings
+from django.conf.urls.static import static
+# from ecommerce.views import book_list
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('__debug__/', include(debug_toolbar.urls)),
     path('course/',include('course.urls')),
     path('enroll/',include('enroll.urls')),
     path('fees/',include('fees.urls')),
@@ -25,4 +32,5 @@ urlpatterns = [
     path('Auth/',include('dj_auth.urls')),
     path('miniblog/',include('dj_miniblog.urls')),
     path('counter/',include('pagecounter.urls')),
-]
+    path('books/',include('caching.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
