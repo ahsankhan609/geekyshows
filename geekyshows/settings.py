@@ -57,6 +57,7 @@ EXTERNAL_APPS = [
     'caching',
     'debug_toolbar',
     'signaling',
+    'trackip',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

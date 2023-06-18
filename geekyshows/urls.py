@@ -34,4 +34,5 @@ urlpatterns = [
     path('counter/',include('pagecounter.urls')),
     path('books/',include('caching.urls')),
     path('signals/',include('signaling.urls')),
+    path('trackip/',include('trackip.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
