@@ -66,6 +66,8 @@ media/
 # Database stuff
 *.sql
 /*.sql
+*.sqlite3
+/*.sqlite3
 
 # Flask stuff:
 instance/
