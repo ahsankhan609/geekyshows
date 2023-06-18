@@ -56,6 +56,7 @@ EXTERNAL_APPS = [
     'pagecounter',
     'caching',
     'debug_toolbar',
+    'signaling',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

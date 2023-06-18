@@ -33,4 +33,5 @@ urlpatterns = [
     path('miniblog/',include('dj_miniblog.urls')),
     path('counter/',include('pagecounter.urls')),
     path('books/',include('caching.urls')),
+    path('signals/',include('signaling.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
